@@ -1,9 +1,36 @@
 import { useEffect, useState } from "react";
-import { Routes, Route, NavLink } from "react-router-dom";
+import { Routes, Route, NavLink, useLocation } from "react-router-dom";
+import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 
-// --- Reusable shell (dark mode + nav) ---
+// Reusable animated page wrapper
+function Page({ children }) {
+  const prefersReduced = useReducedMotion();
+  const transition = prefersReduced
+    ? { duration: 0 }
+    : { duration: 0.35, ease: [0.22, 1, 0.36, 1] };
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 12 }}
+      animate={{ opacity: 1, y: 0, transition }}
+      exit={{ opacity: 0, y: -12, transition }}
+    >
+      {children}
+    </motion.div>
+  );
+}
+
+// Scroll to top on route change (nice w/ transitions)
+function ScrollToTop() {
+  const location = useLocation();
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "instant" });
+  }, [location.pathname]);
+  return null;
+}
+
+// --- App shell (dark mode + nav) ---
 export default function App() {
-  // Persist dark-mode preference
   const [dark, setDark] = useState(() => {
     if (typeof window === "undefined") return false;
     return localStorage.getItem("theme") === "dark";
@@ -20,8 +47,12 @@ export default function App() {
     }
   }, [dark]);
 
+  const location = useLocation();
+
   return (
     <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white text-slate-900 dark:from-slate-900 dark:to-slate-950 dark:text-slate-100">
+      <ScrollToTop />
+
       {/* Top Nav */}
       <header className="px-6 py-4 border-b border-slate-200 dark:border-slate-800">
         <div className="mx-auto max-w-5xl flex items-center justify-between gap-4">
@@ -54,12 +85,16 @@ export default function App() {
         </div>
       </header>
 
-      {/* Routed pages */}
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/about" element={<AboutMe />} />
-        <Route path="/resume" element={<ResumePage />} />
-      </Routes>
+      {/* Routed pages with transitions */}
+      <main>
+        <AnimatePresence mode="wait" initial={false}>
+          <Routes location={location} key={location.pathname}>
+            <Route path="/" element={<Page><Home /></Page>} />
+            <Route path="/about" element={<Page><AboutMe /></Page>} />
+            <Route path="/resume" element={<Page><ResumePage /></Page>} />
+          </Routes>
+        </AnimatePresence>
+      </main>
 
       <footer className="border-t border-slate-200 dark:border-slate-800 py-6 text-center text-sm text-slate-600 dark:text-slate-400">
         © {new Date().getFullYear()} Yangji (Paul) Liu — All rights reserved.
@@ -89,20 +124,9 @@ function NavItem({ to, children }) {
 
 function Home() {
   return (
-    <main>
+    <>
       {/* Hero */}
       <section className="mx-auto max-w-5xl px-6 py-16 text-center">
-        {/* Profile photo */}
-        <img
-          src="/avatar.jpg"
-          srcSet="/avatar@2x.jpg 2x"
-          alt="Yangji (Paul) Liu headshot"
-          width="160"
-          height="160"
-          fetchpriority="high"
-          className="mx-auto mb-4 h-40 w-40 rounded-full object-cover shadow-md ring-2 ring-slate-300 dark:ring-slate-700"
-        />
-
         <h1 className="text-5xl font-extrabold tracking-tight">Yangji (Paul) Liu</h1>
         <p className="text-lg text-slate-600 dark:text-slate-300 mt-2">
           New York University • B.S. Computer & Electrical Engineering
@@ -168,7 +192,7 @@ function Home() {
           ))}
         </div>
       </section>
-    </main>
+    </>
   );
 }
 
