@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
+import { Routes, Route, NavLink } from "react-router-dom";
 
+// --- Reusable shell (dark mode + nav) ---
 export default function App() {
   // Persist dark-mode preference
   const [dark, setDark] = useState(() => {
@@ -19,10 +21,15 @@ export default function App() {
   }, [dark]);
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white dark:from-slate-900 dark:to-slate-950">
-      {/* Top bar with dark-mode toggle */}
-      <header className="px-6 py-4">
-        <div className="mx-auto max-w-4xl flex items-center justify-end gap-3">
+    <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white text-slate-900 dark:from-slate-900 dark:to-slate-950 dark:text-slate-100">
+      {/* Top Nav */}
+      <header className="px-6 py-4 border-b border-slate-200 dark:border-slate-800">
+        <div className="mx-auto max-w-5xl flex items-center justify-between gap-4">
+          <nav className="flex items-center gap-4 text-sm">
+            <NavItem to="/">Home</NavItem>
+            <NavItem to="/about">About</NavItem>
+            <NavItem to="/resume">Resume</NavItem>
+          </nav>
           <button
             onClick={() => setDark((d) => !d)}
             className="btn btn-outline"
@@ -34,11 +41,45 @@ export default function App() {
         </div>
       </header>
 
-      {/* Hero Section */}
-      <section className="mx-auto max-w-4xl px-6 py-16 text-center">
-        <h1 className="text-5xl font-extrabold tracking-tight text-slate-900 dark:text-white">
-          Yangji (Paul) Liu
-        </h1>
+      {/* Routed pages */}
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/about" element={<AboutMe />} />
+        <Route path="/resume" element={<ResumePage />} />
+      </Routes>
+
+      <footer className="border-t border-slate-200 dark:border-slate-800 py-6 text-center text-sm text-slate-600 dark:text-slate-400">
+        © {new Date().getFullYear()} Yangji (Paul) Liu — All rights reserved.
+      </footer>
+    </div>
+  );
+}
+
+function NavItem({ to, children }) {
+  return (
+    <NavLink
+      to={to}
+      className={({ isActive }) =>
+        [
+          "px-3 py-1.5 rounded-2xl",
+          "hover:bg-slate-100 dark:hover:bg-slate-800",
+          isActive ? "bg-slate-100 dark:bg-slate-800 font-semibold" : "",
+        ].join(" ")
+      }
+    >
+      {children}
+    </NavLink>
+  );
+}
+
+// --- Pages ---
+
+function Home() {
+  return (
+    <main>
+      {/* Hero */}
+      <section className="mx-auto max-w-5xl px-6 py-16 text-center">
+        <h1 className="text-5xl font-extrabold tracking-tight">Yangji (Paul) Liu</h1>
         <p className="text-lg text-slate-600 dark:text-slate-300 mt-2">
           New York University • B.S. Computer & Electrical Engineering
         </p>
@@ -47,46 +88,29 @@ export default function App() {
         </p>
 
         <div className="flex flex-wrap justify-center gap-3 mt-8">
-          <a href="mailto:paulliu@nyu.edu" className="btn btn-primary">
-            Email Me
-          </a>
-          <a
-            href="https://github.com/YangjiLiu"
-            target="_blank"
-            rel="noreferrer"
-            className="btn btn-outline"
-          >
-            GitHub
-          </a>
-          <a
-            href="https://www.linkedin.com/in/yangji-liu-39a976331/"
-            target="_blank"
-            rel="noreferrer"
-            className="btn btn-outline"
-          >
-            LinkedIn
-          </a>
+          <a href="mailto:paulliu@nyu.edu" className="btn btn-primary">Email Me</a>
+          <a href="https://github.com/YangjiLiu" target="_blank" rel="noreferrer" className="btn btn-outline">GitHub</a>
+          <a href="https://www.linkedin.com/in/yangji-liu-39a976331/" target="_blank" rel="noreferrer" className="btn btn-outline">LinkedIn</a>
         </div>
       </section>
 
       {/* Education */}
-      <section className="mx-auto max-w-4xl px-6 py-10">
-        <h2 className="text-2xl font-bold mb-4 text-slate-900 dark:text-white">Education</h2>
+      <section className="mx-auto max-w-5xl px-6 py-10">
+        <h2 className="text-2xl font-bold mb-4">Education</h2>
         <article className="card">
           <h3 className="font-semibold">New York University – Tandon School of Engineering</h3>
-          <p className="text-slate-700 dark:text-slate-300 mt-1">
-            B.S. in Electrical and Computer Engineering
-          </p>
+          <p className="text-slate-700 dark:text-slate-300 mt-1">B.S. in Electrical and Computer Engineering</p>
           <p className="text-slate-500 dark:text-slate-400 text-sm">2024 – 2028 (expected)</p>
           <p className="text-slate-600 dark:text-slate-300 mt-3 text-sm">
-            Coursework: Data Structure and Algorithms, OOP in C++, Linear Algebra, Calc I–III, Discrete Math, Computer Architecture and Organization, Circuits.
+            Coursework: Data Structure and Algorithms, OOP in C++, Linear Algebra, Calc I–III, Discrete Math,
+            Computer Architecture and Organization, Circuits.
           </p>
         </article>
       </section>
 
       {/* Projects */}
-      <section className="mx-auto max-w-4xl px-6 py-10">
-        <h2 className="text-2xl font-bold mb-4 text-slate-900 dark:text-white">Projects</h2>
+      <section className="mx-auto max-w-5xl px-6 py-10">
+        <h2 className="text-2xl font-bold mb-4">Projects</h2>
         <div className="grid gap-6 sm:grid-cols-2">
           <article className="card">
             <h3 className="font-semibold">Noble/Warrior OOP Simulator</h3>
@@ -104,23 +128,85 @@ export default function App() {
       </section>
 
       {/* Skills */}
-      <section className="mx-auto max-w-4xl px-6 py-10">
-        <h2 className="text-2xl font-bold mb-4 text-slate-900 dark:text-white">Skills</h2>
+      <section className="mx-auto max-w-5xl px-6 py-10">
+        <h2 className="text-2xl font-bold mb-4">Skills</h2>
         <div className="flex flex-wrap gap-2">
-          {["C++", "Python", "Data Structures", "Computer Architecture", "Linux & Git", "UE5 + Arduino"].map(
-            (s) => (
-              <span key={s} className="chip">
-                {s}
-              </span>
-            )
-          )}
+          {["C++", "Python", "Data Structures", "Computer Architecture", "Linux & Git", "UE5 + Arduino"].map((s) => (
+            <span key={s} className="chip">{s}</span>
+          ))}
         </div>
       </section>
+    </main>
+  );
+}
 
-      {/* Footer */}
-      <footer className="border-t border-slate-200 dark:border-slate-700 py-6 text-center text-sm text-slate-600 dark:text-slate-400">
-        © {new Date().getFullYear()} Yangji (Paul) Liu — All rights reserved.
-      </footer>
-    </div>
+function AboutMe() {
+  return (
+    <main className="mx-auto max-w-5xl px-6 py-16">
+      <h1 className="text-3xl font-bold mb-6">About Me</h1>
+      <div className="grid gap-6 md:grid-cols-3">
+        <section className="md:col-span-2 card">
+          <h2 className="font-semibold mb-3">Hi, I’m Paul 👋</h2>
+          <p className="text-slate-700 dark:text-slate-300">
+            I’m an NYU Tandon undergraduate sophomore pursuing B.S. Electrical and Computer Engineering. My focuses are Object-Oriented Programming, Computer Architecture, and Hardware Systems. I enjoy building
+            clean, testable modules and exploring how hardware and software choices impact performance. With the power of AI, I believe hardwares have been stronger than ever before. I’m currently seeking
+            NYC-area internships where I can contribute to efficient programs and algorithms, as well as real-world systems, and continue learning.
+          </p>
+          <ul className="list-disc list-inside text-slate-700 dark:text-slate-300 mt-4 space-y-1">
+            <li>Languages: C++, Python, Java</li>
+            <li>Interests: research, architecture, algorithms</li>
+            <li>Values: clarity, reliability, and thoughtful documentation</li>
+          </ul>
+        </section>
+
+        <aside className="card">
+          <h3 className="font-semibold mb-2">Quick Facts</h3>
+          <dl className="text-sm space-y-2">
+            <div className="flex justify-between"><dt className="text-slate-500 dark:text-slate-400">Based in</dt><dd>New York, NY</dd></div>
+	    <div className="flex justify-between"><dt className="text-slate-500 dark:text-slate-400">Cumulative GPA</dt><dd>3.35</dd></div>
+            <div className="flex justify-between"><dt className="text-slate-500 dark:text-slate-400">Email</dt><dd><a className="underline" href="mailto:paulliu@nyu.edu">paulliu@nyu.edu</a></dd></div>
+            <div className="flex justify-between"><dt className="text-slate-500 dark:text-slate-400">GitHub</dt><dd><a className="underline" target="_blank" rel="noreferrer" href="https://github.com/YangjiLiu">/YangjiLiu</a></dd></div>
+            <div className="flex justify-between"><dt className="text-slate-500 dark:text-slate-400">LinkedIn</dt><dd><a className="underline" target="_blank" rel="noreferrer" href="https://www.linkedin.com/in/yangji-liu-39a976331/">@yangji-liu</a></dd></div>
+          </dl>
+        </aside>
+      </div>
+    </main>
+  );
+}
+
+function ResumePage() {
+  // Put your PDF at public/resume.pdf (so it serves at /resume.pdf)
+  const resumeUrl = "/resume.pdf";
+  return (
+    <main className="mx-auto max-w-5xl px-6 py-16">
+      <h1 className="text-3xl font-bold mb-4">Resume</h1>
+
+      <div className="mb-4 flex gap-3">
+        <a className="btn btn-primary" href={resumeUrl} download>
+          Download Resume
+        </a>
+        <a className="btn btn-outline" href={resumeUrl} target="_blank" rel="noreferrer">
+          Open in New Tab
+        </a>
+      </div>
+
+      <div className="card p-0 overflow-hidden">
+        {/* Inline PDF preview with fallback */}
+        <object
+          data={resumeUrl}
+          type="application/pdf"
+          className="w-full"
+          style={{ height: "80vh" }}
+        >
+          <div className="p-6 text-sm text-slate-600 dark:text-slate-300">
+            Your browser can’t display the PDF here.{" "}
+            <a className="underline" href={resumeUrl} target="_blank" rel="noreferrer">
+              Click to open the resume
+            </a>
+            .
+          </div>
+        </object>
+      </div>
+    </main>
   );
 }
