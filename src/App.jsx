@@ -20,7 +20,7 @@ function Page({ children }) {
   );
 }
 
-// Scroll to top on route change (nice w/ transitions)
+// Scroll to top on route change
 function ScrollToTop() {
   const location = useLocation();
   useEffect(() => {
@@ -127,6 +127,17 @@ function Home() {
     <>
       {/* Hero */}
       <section className="mx-auto max-w-5xl px-6 py-16 text-center">
+        {/* Profile photo (put file in public/avatar.jpg) */}
+        <img
+          src="/avatar.jpg"
+          srcSet="/avatar@2x.jpg 2x"
+          alt="Yangji (Paul) Liu headshot"
+          width="160"
+          height="160"
+          fetchpriority="high"
+          className="mx-auto mb-4 h-40 w-40 rounded-full object-cover shadow-md ring-2 ring-slate-300 dark:ring-slate-700"
+        />
+
         <h1 className="text-5xl font-extrabold tracking-tight">Yangji (Paul) Liu</h1>
         <p className="text-lg text-slate-600 dark:text-slate-300 mt-2">
           New York University • B.S. Computer & Electrical Engineering
