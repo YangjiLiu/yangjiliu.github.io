@@ -216,7 +216,7 @@ function AboutMe() {
           <h2 className="font-semibold mb-3">Hi, I’m Paul 👋</h2>
           <p className="text-slate-700 dark:text-slate-300">
             I’m an NYU Tandon undergraduate sophomore pursuing B.S. Electrical and Computer Engineering. My focuses are Object-Oriented Programming, Computer Architecture, and Hardware Systems. I enjoy building
-            clean, testable modules and exploring how hardware and software choices impact performance. With the power of AI, I believe hardwares have been stronger than ever before. I’m currently seeking
+            clean, testable modules and exploring how hardware and software choices impact performance. With the power of AI, I believe hardware and software have been stronger than ever before. I’m currently seeking
             NYC-area internships where I can contribute to efficient programs and algorithms, as well as real-world systems, and continue learning.
           </p>
           <ul className="list-disc list-inside text-slate-700 dark:text-slate-300 mt-4 space-y-1">
