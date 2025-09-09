@@ -25,11 +25,24 @@ export default function App() {
       {/* Top Nav */}
       <header className="px-6 py-4 border-b border-slate-200 dark:border-slate-800">
         <div className="mx-auto max-w-5xl flex items-center justify-between gap-4">
-          <nav className="flex items-center gap-4 text-sm">
-            <NavItem to="/">Home</NavItem>
-            <NavItem to="/about">About</NavItem>
-            <NavItem to="/resume">Resume</NavItem>
-          </nav>
+          {/* left: brand logo + nav */}
+          <div className="flex items-center gap-3">
+            <a href="/" className="inline-flex items-center gap-2">
+              <img
+                src={dark ? "/favicon-dark.svg" : "/favicon-light.svg"}
+                alt="YL logo"
+                className="h-7 w-7 rounded-lg"
+              />
+              <span className="hidden sm:inline font-semibold">Paul Liu</span>
+            </a>
+            <nav className="ml-4 flex items-center gap-4 text-sm">
+              <NavItem to="/">Home</NavItem>
+              <NavItem to="/about">About</NavItem>
+              <NavItem to="/resume">Resume</NavItem>
+            </nav>
+          </div>
+
+          {/* right: theme toggle */}
           <button
             onClick={() => setDark((d) => !d)}
             className="btn btn-outline"
@@ -79,6 +92,17 @@ function Home() {
     <main>
       {/* Hero */}
       <section className="mx-auto max-w-5xl px-6 py-16 text-center">
+        {/* Profile photo */}
+        <img
+          src="/avatar.jpg"
+          srcSet="/avatar@2x.jpg 2x"
+          alt="Yangji (Paul) Liu headshot"
+          width="160"
+          height="160"
+          fetchpriority="high"
+          className="mx-auto mb-4 h-40 w-40 rounded-full object-cover shadow-md ring-2 ring-slate-300 dark:ring-slate-700"
+        />
+
         <h1 className="text-5xl font-extrabold tracking-tight">Yangji (Paul) Liu</h1>
         <p className="text-lg text-slate-600 dark:text-slate-300 mt-2">
           New York University • B.S. Computer & Electrical Engineering
@@ -122,14 +146,14 @@ function Home() {
             <h3 className="font-semibold">Tsinglan WEService for AP CSA Tutoring</h3>
             <p className="text-slate-600 dark:text-slate-300 mt-2 text-sm">
               Constructed a website with articles and video tutorials and a forum for discussion dedicated to Java newbies and AP CSA learners. Enrolled in AP with WE Service, and was awarded with WE Service Recognition. 
-		<a
-      href="https://tsweservice.wordpress.com"
-      target="_blank"
-      rel="noreferrer"
-      className="underline text-brand-600 dark:text-brand-400 ml-1"
-    >
-      Visit project ↗
-    </a>
+              <a
+                href="https://tsweservice.wordpress.com"
+                target="_blank"
+                rel="noreferrer"
+                className="underline text-brand-600 dark:text-brand-400 ml-1"
+              >
+                Visit project ↗
+              </a>
             </p>
           </article>
         </div>
@@ -171,7 +195,7 @@ function AboutMe() {
           <h3 className="font-semibold mb-2">Quick Facts</h3>
           <dl className="text-sm space-y-2">
             <div className="flex justify-between"><dt className="text-slate-500 dark:text-slate-400">Based in</dt><dd>New York, NY</dd></div>
-	    <div className="flex justify-between"><dt className="text-slate-500 dark:text-slate-400">Cumulative GPA</dt><dd>3.35</dd></div>
+            <div className="flex justify-between"><dt className="text-slate-500 dark:text-slate-400">Cumulative GPA</dt><dd>3.35</dd></div>
             <div className="flex justify-between"><dt className="text-slate-500 dark:text-slate-400">Email</dt><dd><a className="underline" href="mailto:paulliu@nyu.edu">paulliu@nyu.edu</a></dd></div>
             <div className="flex justify-between"><dt className="text-slate-500 dark:text-slate-400">GitHub</dt><dd><a className="underline" target="_blank" rel="noreferrer" href="https://github.com/YangjiLiu">/YangjiLiu</a></dd></div>
             <div className="flex justify-between"><dt className="text-slate-500 dark:text-slate-400">LinkedIn</dt><dd><a className="underline" target="_blank" rel="noreferrer" href="https://www.linkedin.com/in/yangji-liu-39a976331/">@yangji-liu</a></dd></div>
