@@ -84,7 +84,7 @@ function Home() {
           New York University • B.S. Computer & Electrical Engineering
         </p>
         <p className="text-slate-700 dark:text-slate-300 max-w-2xl mx-auto mt-6">
-          OOP-focused C++ developer exploring computer architecture and systems. Open to NYC-area internships.
+          Software & hardware developer exploring computer architecture and systems. Open to NYC-area internships.
         </p>
 
         <div className="flex flex-wrap justify-center gap-3 mt-8">
@@ -113,15 +113,23 @@ function Home() {
         <h2 className="text-2xl font-bold mb-4">Projects</h2>
         <div className="grid gap-6 sm:grid-cols-2">
           <article className="card">
-            <h3 className="font-semibold">Noble/Warrior OOP Simulator</h3>
+            <h3 className="font-semibold">EG1004 Semester-long Design Project</h3>
             <p className="text-slate-600 dark:text-slate-300 mt-2 text-sm">
-              Multi-class battle simulator demonstrating composition, inheritance, operator overloading, and copy control.
+              Affiliated with NYU Tandon's EG-UY 1004 Intro to Engineering course. A Building construction with Autodesk Fusion 360, 3D printing, and laser cutting. Proposed and introduced designs to reduce energy consumption and comply with LEED Gold standard while providing spaces for comprehensive uses, including classrooms, dormitories, laboratories, rooftop parks, and study spaces.
             </p>
           </article>
           <article className="card">
-            <h3 className="font-semibold">BigUnsigned & Algorithms</h3>
+            <h3 className="font-semibold">Tsinglan WEService for AP CSA Tutoring</h3>
             <p className="text-slate-600 dark:text-slate-300 mt-2 text-sm">
-              Arbitrary-precision integer with friend vs non-friend operators; recursion utilities.
+              Constructed a website with articles and video tutorials and a forum for discussion dedicated to Java newbies and AP CSA learners. Enrolled in AP with WE Service, and was awarded with WE Service Recognition. 
+		<a
+      href="https://tsweservice.wordpress.com"
+      target="_blank"
+      rel="noreferrer"
+      className="underline text-brand-600 dark:text-brand-400 ml-1"
+    >
+      Visit project ↗
+    </a>
             </p>
           </article>
         </div>
@@ -131,7 +139,7 @@ function Home() {
       <section className="mx-auto max-w-5xl px-6 py-10">
         <h2 className="text-2xl font-bold mb-4">Skills</h2>
         <div className="flex flex-wrap gap-2">
-          {["C++", "Python", "Data Structures", "Computer Architecture", "Linux & Git", "UE5 + Arduino"].map((s) => (
+          {["C++", "Python", "Data Structures", "Computer Architecture", "Linux & Git", "Mac & Windows Environment"].map((s) => (
             <span key={s} className="chip">{s}</span>
           ))}
         </div>
