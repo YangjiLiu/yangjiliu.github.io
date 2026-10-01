@@ -9,7 +9,7 @@ export const site = {
   github: "https://github.com/YangjiLiu",
   linkedin: "https://www.linkedin.com/in/yangji-liu-39a976331/",
   location: "New York, NY",
-  gpa: "3.3",
+  gpa: "3.378 / 4.0",
 
   // Static assets (put files in /public)
   avatar: "/avatar.jpg",    // optional @2x: /avatar@2x.jpg
@@ -51,7 +51,7 @@ export const site = {
   about: {
     introTitle: "Hi, I’m Paul 👋",
     intro:
-      "I’m an NYU undergraduate sophomore pursuing B.A. Computer and Data Science. My focuses are Object-Oriented Programming, Computer Architecture, and Data Science. I enjoy building clean, testable modules and exploring how hardware and software choices impact performance. With the power of AI, I believe software engineering has been stronger than ever before. I’m currently seeking US-based internships where I can contribute to efficient programs and algorithms, as well as real-world systems, and continue learning.",
+      "I’m an NYU undergraduate junior pursuing B.A. Computer and Data Science. My focuses are Object-Oriented Programming, Computer Architecture, and Data Science. I enjoy building clean, testable modules and exploring how hardware and software choices impact performance. With the power of AI, I believe software engineering has been stronger than ever before. I’m currently seeking internships where I can contribute to efficient programs and algorithms, as well as real-world systems, and continue learning.",
     languages: "Languages: C++, Python, Java",
     interests: "Interests: research, architecture, algorithms",
     values: "Values: clarity, reliability, and thoughtful documentation",
